@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>你好 · Hello App</title>
+<style>
+  :root { color-scheme: light dark; --bg:#0f172a; --card:#1e293b; --accent:#38bdf8; --text:#f1f5f9; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; background: radial-gradient(1200px 600px at 50% -10%, #1e3a5f, var(--bg)); color: var(--text); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+  .card { max-width:640px; width:100%; background:var(--card); border:1px solid #334155; border-radius:20px; padding:40px 36px; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.4); }
+  h1 { font-size:clamp(32px,6vw,56px); margin:0 0 12px; }
+  p { color:#cbd5e1; line-height:1.8; margin:8px 0; }
+  .badge { display:inline-block; background:#0ea5e9; color:#fff; font-size:13px; padding:4px 12px; border-radius:999px; margin-bottom:16px; }
+  .btns { margin-top:24px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  button, a.btn { background:var(--accent); color:#06202e; border:0; border-radius:12px; padding:12px 22px; font-size:16px; font-weight:700; cursor:pointer; text-decoration:none; }
+  button.ghost { background:transparent; color:var(--text); border:1px solid #475569; }
+  #clock { font-variant-numeric: tabular-nums; font-size:15px; color:#7dd3fc; min-height:22px; }
+  footer { margin-top:20px; font-size:12px; color:#64748b; }
+</style>
+</head>
+<body>
+<main class="card">
+  <span class="badge">App · Running on port 3000</span>
+  <h1>你好 👋</h1>
+  <p>欢迎来到 Hello App。这是一个部署在项目目录内的静态应用。</p>
+  <p>Hello! This static app is served from <code>dist/</code> inside the project.</p>
+  <div id="clock" aria-live="polite"></div>
+  <div class="btns">
+    <button id="greet" type="button">打个招呼</button>
+    <button id="timeBtn" class="ghost" type="button">显示时间</button>
+  </div>
+  <p id="msg" role="status"></p>
+  <footer>Static · dist/index.html · healthy</footer>
+</main>
+<script>
+  const msg = document.getElementById('msg');
+  document.getElementById('greet').addEventListener('click', () => {
+    msg.textContent = '你好，世界！Hello, world! 🎉 (' + new Date().toLocaleTimeString('zh-CN') + ')';
+  });
+  document.getElementById('timeBtn').addEventListener('click', () => {
+    document.getElementById('clock').textContent = '现在时间：' + new Date().toLocaleString('zh-CN');
+  });
+  (function tick(){ document.getElementById('clock').textContent = '现在时间：' + new Date().toLocaleString('zh-CN'); setTimeout(tick, 1000); })();
+</script>
+</body>
+</html>
